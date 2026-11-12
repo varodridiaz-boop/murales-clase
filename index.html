@@ -1,0 +1,672 @@
+# Sociogram: El Paisaje Lingüístico-Sociológico
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sociogram - The Sociological Wall</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .instagram-gradient {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 antialiased">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 max-w-5xl mx-auto">
+        <div class="flex items-center space-x-2 cursor-pointer" onclick="switchTab('wall')">
+            <i class="fa-solid fa-camera-retro text-2xl text-transparent bg-clip-text instagram-gradient"></i>
+            <span class="text-xl font-bold tracking-tight font-serif italic">Sociogram</span>
+        </div>
+        
+        <!-- Search bar -->
+        <div class="hidden sm:block relative w-64">
+            <input type="text" placeholder="Buscar conceptos, autores..." class="w-full bg-gray-100 border border-transparent rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:bg-white focus:border-gray-300">
+            <i class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-gray-400 text-xs"></i>
+        </div>
+
+        <!-- Icons Navigation & Global Upload Button -->
+        <div class="flex items-center space-x-4 sm:space-x-6 text-xl text-gray-700">
+            <button onclick="document.getElementById('global-file-input').click()" class="text-xs bg-slate-950 hover:bg-slate-800 text-white font-semibold py-1.5 px-3 rounded-md transition shadow-sm flex items-center space-x-1">
+                <i class="fa-solid fa-upload text-[10px]"></i>
+
+                <span>Cargar mis 5 fotos</span>
+            </button>
+            <input type="file" id="global-file-input" accept="image/*" multiple onchange="handleGlobalUpload(event)" class="hidden">
+
+            <button onclick="switchTab('wall')" id="nav-wall" class="text-black font-bold transition"><i class="fa-solid fa-house"></i></button>
+            <button onclick="switchTab('reels')" id="nav-reels" class="hover:text-black transition"><i class="fa-solid fa-clapperboard"></i></button>
+            <button onclick="switchTab('info')" id="nav-info" class="hover:text-black transition"><i class="fa-solid fa-circle-info"></i></button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto pt-24 pb-12 px-4">
+
+        <!-- TAB 1: WALL / MURO -->
+        <div id="tab-wall" class="tab-content block">
+            <!-- Profile Header Section -->
+            <div class="flex flex-col sm:flex-row items-center border-b border-gray-200 pb-8 mb-8 space-y-4 sm:space-y-0 sm:space-x-12">
+                <div class="relative">
+                    <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full instagram-gradient p-1 flex items-center justify-between">
+
+                        <div class="w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-users text-4xl text-gray-600"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-1 right-2 bg-green-500 border-2 border-white w-5 h-5 rounded-full"></span>
+                </div>
+                
+                <div class="flex-1 text-center sm:text-left">
+                    <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+                        <h2 class="text-2xl font-light tracking-wide">@TheSociologicalWall</h2>
+                        <span class="bg-blue-500 text-white text-xs px-2.5 py-1 rounded font-semibold self-center sm:self-auto">Cuenta Verificada</span>
+                    </div>
+                    <div class="flex justify-center sm:justify-start space-x-6 text-sm mb-4">
+                        <div><strong>5</strong> publicaciones</div>
+                        <div><strong>2026/27</strong> Curso</div>
+                        <div><strong>FOL</strong> Especialidad</div>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-bold">Máster en Formación del Profesorado (UDIMA)</p>
+
+                        <p class="text-gray-500">Asignatura: Sociedad, Familia y Educación</p>
+                        <p class="mt-2 text-gray-700 font-medium">✨ Miembros del Grupo de Investigación:</p>
+                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 mt-1">
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded-full text-gray-600 border border-gray-200">Santiago Aller García</span>
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded-full text-gray-600 border border-gray-200">Virginia Granda del Pozo</span>
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded-full text-gray-600 border border-gray-200">Paula Trapiella Miguel</span>
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded-full text-gray-600 border border-gray-200">Sandra Rodríguez Pla</span>
+                            <span class="bg-gray-100 text-xs px-2 py-1 rounded-full text-gray-600 border border-gray-200">Vanessa Rodríguez Díaz</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed Filter -->
+            <div class="flex justify-center border-b border-gray-200 mb-6 text-sm font-semibold tracking-wider text-gray-500">
+                <div class="border-t border-black text-black pt-3 pb-3 flex items-center space-x-2 cursor-pointer uppercase">
+                    <i class="fa-solid fa-grid-3x3"></i>
+                    <span>Publicaciones del Paisaje Lingüístico</span>
+                </div>
+
+            </div>
+
+            <!-- Notification banner for state -->
+            <div id="upload-status-banner" class="hidden max-w-xl mx-auto mb-6 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-lg text-xs font-medium flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
+                    <span id="upload-status-text">¡Fotos cargadas y memorizadas con éxito en el navegador!</span>
+                </div>
+                <button onclick="document.getElementById('upload-status-banner').classList.add('hidden')" class="text-emerald-500 hover:text-emerald-700"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Posts List Feed -->
+            <div class="space-y-12 max-w-xl mx-auto">
+
+                <!-- POST 1: DEEPFAKES -->
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="p-3.5 flex items-center justify-between border-b border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-xs">P1</div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold">Cartel sobre Deepfakes Sexuales</h4>
+                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>Campus del Cristo (Universidad de Oviedo) - Facultad de Derecho</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative bg-neutral-100 flex flex-col justify-center items-center overflow-hidden min-h-[320px]">
+                        <img id="img-post-1" src="https://githubusercontent.com" class="w-full h-auto object-cover" alt="Cartel Deepfake Sexual">
+                        <div id="box-empty-1" class="hidden p-6 text-center flex flex-col items-center justify-center space-y-2 bg-neutral-50 py-12 w-full min-h-[320px]">
+                            <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                            <p class="text-xs font-medium text-gray-500">Enlace bloqueado por el navegador o entorno.</p>
+                            <p class="text-[11px] text-gray-400">Pulsa el botón de arriba "Cargar mis 5 fotos" para subirlas si no se visualizan.</p>
+                        </div>
+                    </div>
+
+                    <!-- Texto y Comentarios -->
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-3 text-2xl text-gray-700">
+
+                            <div class="flex space-x-4">
+                                <button onclick="toggleLike(this)" class="hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                                <i class="fa-regular fa-comment"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold mb-2"><span class="likes-count">142</span> Me gusta</p>
+                        
+                        <div class="text-sm leading-relaxed text-gray-800 space-y-2">
+                            <p>
+                                <span class="font-bold mr-2 text-black">@TheSociologicalWall</span>
+                                Este cartel irrumpe en el paisaje universitario rompiendo su aparente neutralidad y actuando como un potente elemento de currículo oculto. Visualmente, la mano masculina que enfoca el cuerpo de una mujer a través del móvil evidencia la prescripción del patriarcado y la cosificación digital, conectando con el control y la vigilancia de Foucault (1975). Al citar el Código Penal, el cartel apela a la dominación legal-racional (Weber, 1921/1979) para establecer qué conductas son inaceptables (Rocher, 1973/2006).
+                            </p>
+                            <p class="text-gray-700">
+                                Desde la sociología, refleja cómo las tecnologías son potentes agentes de socialización (Picasso, 2023) que reproducen la socialización diferencial de género y la violencia simbólica. Pedagógicamente, es una herramienta clave para trabajar el consentimiento y la intimidad, evidenciando la necesidad de una alfabetización mediática crítica (Buckingham, 2003) frente a los riesgos de la "modernidad líquida" (Bauman, 2005).
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-100 space-y-2 text-xs">
+                            <p class="text-gray-400 uppercase font-semibold tracking-wider text-[10px] mb-1">Comentarios de los Teóricos</p>
+
+                            <div>
+                                <span class="font-bold text-slate-800">@m_foucault</span> <span class="text-gray-600">El smartphone actúa como el panóptico moderno: vigilancia constante e interiorización del castigo digital. #VigilarYCastigar</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@max_weber</span> <span class="text-gray-600">La referencia explícita al Código Penal demuestra cómo el Estado moderno apela a la dominación legal-racional para pautar y disciplinar la conducta digital.</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@z_bauman</span> <span class="text-gray-600">En la modernidad líquida, los vínculos se vuelven virtuales y la intimidad se precariza o quiebra por la velocidad de las interacciones virtuales.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POST 2: MURAL DIVERSIDAD E INCLUSIÓN -->
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="p-3.5 flex items-center justify-between border-b border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-xs">P2</div>
+                            <div>
+
+                                <h4 class="text-sm font-semibold">Mural sobre Diversidad e Inclusión</h4>
+                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>E.P.A. Eduardo Pondal, A Coruña</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative bg-neutral-100 flex flex-col justify-center items-center overflow-hidden min-h-[320px]">
+                        <img id="img-post-2" src="https://githubusercontent.com" class="w-full h-auto object-cover" alt="Mural You Belong Here">
+                        <div id="box-empty-2" class="hidden p-6 text-center flex flex-col items-center justify-center space-y-2 bg-neutral-50 py-12 w-full min-h-[320px]">
+                            <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                            <p class="text-xs font-medium text-gray-500">Enlace bloqueado por el navegador o entorno.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-3 text-2xl text-gray-700">
+                            <div class="flex space-x-4">
+                                <button onclick="toggleLike(this)" class="hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                                <i class="fa-regular fa-comment"></i>
+
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold mb-2"><span class="likes-count">218</span> Me gusta</p>
+                        
+                        <div class="text-sm leading-relaxed text-gray-800 space-y-2">
+                            <p>
+                                <span class="font-bold mr-2 text-black">@TheSociologicalWall</span>
+                                Este mural, creado por el propio alumnado, transforma las paredes del centro en un microcosmos de concienciación y conflicto ideológico. Lejos de ser una simple decoración, actúa como un potente currículo oculto (Carrasco Carpio & Ibáñez Carrasco, 2024) que desafía los roles tradicionales y la socialización diferencial de género (Picasso, 2023).(Bonilla-Algovia & Carrasco Carpio, 2024).
+                            </p>
+                            <p class="text-gray-700">
+                                A través de referentes feministas (Audre Lorde, Frida Kahlo), el movimiento antirracista y consignas como "Your body, your way", los estudiantes ejercen su imaginación sociológica (Wright Mills, 1959). Conectan grandes problemas globales con su propia identidad íntima, aplicando la interseccionalidad (Crenshaw, 1989) para entrelazar género, raza y diversidad corporal, y construyendo un espacio seguro frente al sexismo (SOS Racismo Gipuzkoa, 2022).
+                            </p>
+                            <p class="text-gray-700 text-xs italic bg-gray-50 p-2 border-l-2 border-emerald-400 rounded">
+                                Sin embargo, como señalan las aportaciones del equipo, mostrar diversidad no garantiza por sí solo la inclusión. Para que este mensaje visual se convierta en una realidad objetiva y subjetiva (Berger & Luckmann, 1968/2001) y no quede en un mero gesto estético, debe reflejarse en la convivencia diaria, en la participación real y sostenerse mediante un currículum explícito y transversal (Bonilla-Algovia & Carrasco Carpio, 2024).
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-100 space-y-2 text-xs">
+                            <p class="text-gray-400 uppercase font-semibold tracking-wider text-[10px] mb-1">Comentarios de los Teóricos</p>
+
+                            <div>
+                                <span class="font-bold text-slate-800">@c_wright_mills</span> <span class="text-gray-600">El alumnado conecta las problemáticas globales históricas con su vida e identidad íntima. ¡Pura imaginación sociológica!</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@k_crenshaw</span> <span class="text-gray-600">Las identidades no van por separado, se cruzan y generan formas simultáneas de opresión que los chicos denuncian visualmente.</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@berger_luckmann</span> <span class="text-gray-600">Los mensajes influyen en cómo se ven a sí mismos si la inclusión pasa de ser un objeto gráfico a una realidad subjetiva.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POST 3: MURAL ESCUELA RURAL -->
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="p-3.5 flex items-center justify-between border-b border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 font-bold text-xs">P3</div>
+                            <div>
+
+                                <h4 class="text-sm font-semibold">Mural «Continuem construint el nostre camí»</h4>
+                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>Escuela Sant Blai, Bot, Terra Alta, provincia Tarragona</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative bg-neutral-100 flex flex-col justify-center items-center overflow-hidden min-h-[320px]">
+                        <img id="img-post-3" src="https://githubusercontent.com" class="w-full h-auto object-cover" alt="Mural Continuem Construint">
+                        <div id="box-empty-3" class="hidden p-6 text-center flex flex-col items-center justify-center space-y-2 bg-neutral-50 py-12 w-full min-h-[320px]">
+                            <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                            <p class="text-xs font-medium text-gray-500">Enlace bloqueado por el navegador o entorno.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-3 text-2xl text-gray-700">
+                            <div class="flex space-x-4">
+                                <button onclick="toggleLike(this)" class="hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                                <i class="fa-regular fa-comment"></i>
+
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold mb-2"><span class="likes-count">305</span> Me gusta</p>
+                        
+                        <div class="text-sm leading-relaxed text-gray-800 space-y-2">
+                            <p>
+                                <span class="font-bold mr-2 text-black">@TheSociologicalWall</span>
+                                Este mural transforma el espacio escolar en un reflejo de la sociedad y en una comunidad compartida. El mural, que entremezcla nombres de distintos orígenes bajo el lema "Continuem construint el nostre camí", actúa como el "cemento de la sociedad" (Elster, 1989) y refuerza el vínculo social (Nisbet, 1970/1982).
+                            </p>
+                            <p class="text-gray-700">
+                                El espacio físico funciona aquí como un currículo oculto (Jackson, 1968/1991; Apple, 1986) que transmite valores de democracia y participación. Al integrar los nombres de todo el grupo en corazones idénticos, se favorece la construcción del sentimiento de pertenencia e identidad (Picasso, 2023). Esto actúa como un ancla frente a la fragilidad de la "modernidad líquida" (Bauman, 2005) y facilita la transición hacia la socialización secundaria, ayudando a interiorizar normas de convivencia y cohesión grupal más allá del ámbito familiar (Berger & Luckmann, 1968/2001; Mead, 1926/1999).
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-100 space-y-2 text-xs">
+                            <p class="text-gray-400 uppercase font-semibold tracking-wider text-[10px] mb-1">Comentarios de los Teóricos</p>
+                            <div>
+                                <span class="font-bold text-slate-800">@j_elster</span> <span class="text-gray-600">Las interacciones cooperativas basadas en valores compartidos son el auténtico cemento de la solidaridad social en el aula.</span>
+                            </div>
+
+                            <div>
+                                <span class="font-bold text-slate-800">@gh_mead</span> <span class="text-gray-600">La iconografía de corazones idénticos permite al alumnado rural asimilar su pertenencia colectiva e interiorizar al "Otro Generalizado".</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@e_durkheim</span> <span class="text-gray-600">La escuela opera como un microcosmos social clave, facilitando la cohesión moral y la inserción armónica en la vida colectiva.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POST 4: PANELES DIVERSIDAD CULTURAL -->
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="p-3.5 flex items-center justify-between border-b border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">P4</div>
+                            <div>
+                                <h4 class="text-sm font-semibold">Paneles de Brasil, Colombia y Cuba</h4>
+                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>E.P.A. Eduardo Pondal, A Coruña</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="relative bg-neutral-100 flex flex-col justify-center items-center overflow-hidden min-h-[320px]">
+                        <img id="img-post-4" src="https://githubusercontent.com" class="w-full h-auto object-cover" alt="Paneles de Diversidad Cultural">
+                        <div id="box-empty-4" class="hidden p-6 text-center flex flex-col items-center justify-center space-y-2 bg-neutral-50 py-12 w-full min-h-[320px]">
+                            <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                            <p class="text-xs font-medium text-gray-500">Enlace bloqueado por el navegador o entorno.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-3 text-2xl text-gray-700">
+                            <div class="flex space-x-4">
+                                <button onclick="toggleLike(this)" class="hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                                <i class="fa-regular fa-comment"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold mb-2"><span class="likes-count">189</span> Me gusta</p>
+
+                        
+                        <div class="text-sm leading-relaxed text-gray-800 space-y-2">
+                            <p>
+                                <span class="font-bold mr-2 text-black">@TheSociologicalWall</span>
+                                Estos paneles exponen la diversidad cultural del centro mediante la comparación de tres países, empleando la lengua gallega como vehículo de inclusión. Desde la sociología, reflejan los elementos normativos, afectivos y cognitivos de la cultura (Picasso, 2023), pero corren el peligro de caer en un enfoque superficial si se limitan a mostrar gastronomía y festividades, sin abordar las barreras socioeconómicas reales que afrontan las familias (Bernstein, 1993).
+                            </p>
+                            <p class="text-gray-700">
+                                El gran acierto del mural es su capacidad para romper con el currículo monocultural y etnocéntrico tradicional. Al incorporar figuras históricas y lenguas indígenas, se combate la reproducción cultural de las élites (Bourdieu & Passeron, 1977) y se aportan contenidos descolonizados (Walsh, 2010). No obstante, como advierte el equipo, mostrar diversidad no es sinónimo de inclusión real. Para que la escuela cumpla su función socializadora igualitaria (Durkheim, 1922/1975) y evite una visión estática de la cultura (García Santacruz & Flórez-Estrada Chassonnaud, 2023), es necesario que estos paneles se acompañen de dinámicas dialógicas donde el alumnado comparta sus propias vivencias y se cuestione el verdadero significado de la igualdad y la diferencia (De Sousa Santos, 2003).
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-100 space-y-2 text-xs">
+                            <p class="text-gray-400 uppercase font-semibold tracking-wider text-[10px] mb-1">Comentarios de los Teóricos</p>
+                            <div>
+                                <span class="font-bold text-slate-800">@p_bourdieu</span> <span class="text-gray-600">Visibilizar figuras alternativas cuestiona la legitimidad cultural de las élites dominantes, ampliando el capital cultural escolar.</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@b_bernstein</span> <span class="text-gray-600">Atención a la pedagogía visible: si la práctica no aborda los códigos lingüísticos del aula, las desigualdades de base persisten.</span>
+                            </div>
+
+                            <div>
+                                <span class="font-bold text-slate-800">@b_de_sousa_santos</span> <span class="text-gray-600">"Tenemos derecho a ser iguales cuando la diferencia nos inferioriza; tenemos derecho a ser diferentes cuando la igualdad nos descaracteriza". Un gran homenaje a las epistemologías del sur.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POST 5: COLMEA CIENTÍFICAS -->
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div class="p-3.5 flex items-center justify-between border-b border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xs">P5</div>
+                            <div>
+                                <h4 class="text-sm font-semibold">Mural «A Colmea das Mulleres Científicas»</h4>
+                                <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>CPI Plurilingüe de Castroverde, Lugo, Galicia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="relative bg-neutral-100 flex flex-col justify-center items-center overflow-hidden min-h-[320px]">
+                        <img id="img-post-5" src="https://githubusercontent.com" class="w-full h-auto object-cover" alt="La Colmena de las Mujeres Científicas">
+                        <div id="box-empty-5" class="hidden p-6 text-center flex flex-col items-center justify-center space-y-2 bg-neutral-50 py-12 w-full min-h-[320px]">
+                            <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                            <p class="text-xs font-medium text-gray-500">Enlace bloqueado por el navegador o entorno.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-3 text-2xl text-gray-700">
+                            <div class="flex space-x-4">
+                                <button onclick="toggleLike(this)" class="hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                                <i class="fa-regular fa-comment"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold mb-2"><span class="likes-count">412</span> Me gusta</p>
+                        
+                        <div class="text-sm leading-relaxed text-gray-800 space-y-2">
+                            <p>
+
+                                <span class="font-bold mr-2 text-black">@TheSociologicalWall</span>
+                                Este mural en forma de panal, elaborado en gallego, es un potente elemento del paisaje lingüístico que legitima un universo simbólico propio y rompe con la jerarquización cultural (Berger & Luckmann, 1968/2001). Su estructura colectiva visibiliza las aportaciones femeninas a la ciencia, combatiendo directamente el androcentrismo y el currículo oculto que históricamente ha desviado a las alumnas de las disciplinas STEM (Subirats & Brullet, 2002; Cobo, 2002).
+                            </p>
+                            <p class="text-gray-700">
+                                Para que este paisaje gráfico sea plenamente inclusivo, es fundamental aplicar la interseccionalidad (Crenshaw, 1989), asegurando que las científicas representadas abarquen diversas razas y clases sociales. De este modo, el centro no solo visibiliza, sino que transforma las estructuras de poder, transmitiendo nuevos valores colectivos y demostrando al alumnado que no existen ámbitos de conocimiento exclusivamente masculinos o femeninos.
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-100 space-y-2 text-xs">
+                            <p class="text-gray-400 uppercase font-semibold tracking-wider text-[10px] mb-1">Comentarios de los Teóricos</p>
+                            <div>
+                                <span class="font-bold text-slate-800">@m_subirats</span> <span class="text-gray-600">Romper la transmisión androcéntrica en la escuela mixta requiere dotar a las jóvenes de referentes habituales y tangibles en orientación STEM.</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@m_fricker</span> <span class="text-gray-600">Este panal aporta una excelente herramienta conceptual, haciendo efectiva la justicia epistémica frente a la invisibilización histórica de las mujeres en la ciencia.</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800">@j_butler</span> <span class="text-gray-600">Al subvertir discursos preestablecidos en el entorno diario, alteramos la repetición performativa de los roles tradicionales de género.</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 2: REELS -->
+        <div id="tab-reels" class="tab-content hidden">
+            <div class="text-center max-w-md mx-auto mb-6">
+                <h2 class="text-2xl font-bold mb-2"><i class="fa-solid fa-clapperboard text-transparent bg-clip-text instagram-gradient mr-2"></i>Sección de Reels</h2>
+                <p class="text-sm text-gray-600">Conclusiones argumentadas del proyecto de investigación en formato multimedia interactivo.</p>
+            </div>
+            
+            <div class="max-w-sm mx-auto bg-black rounded-3xl overflow-hidden shadow-2xl relative border-8 border-gray-800 aspect-[9/16] h-[550px] flex flex-col justify-between p-6 text-white">
+                <div class="flex justify-between items-center z-10">
+                    <span class="font-bold text-[10px] tracking-widest bg-red-600 px-2 py-0.5 rounded animate-pulse">REEL EN REPRODUCCIÓN</span>
+                </div>
+
+
+                <div id="reel-slide-container" class="my-auto text-center space-y-4 px-2 z-10 transition-all duration-500">
+                    <div id="reel-icon" class="text-4xl text-rose-400 mb-2"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3 id="reel-title" class="text-lg font-bold tracking-wide border-b border-white/20 pb-2">Conclusión General</h3>
+                    <p id="reel-text" class="text-xs leading-relaxed font-light text-gray-200 drop-shadow-md">
+                        A lo largo de este trabajo, el análisis de los diferentes elementos visuales y textuales presentes en los centros educativos nos ha permitido constatar que el espacio escolar no es, en ningún caso, un territorio neutro. Las paredes, los murales y los carteles actúan como un potente "currículo oculto" que educa de forma silenciosa, transmitiendo normas, valores y modelos de identidad que condicionan directamente la socialización del alumnado."
+                    </p>
+                </div>
+
+                <div class="space-y-4 z-10">
+                    <button onclick="playReelVoice()" class="w-full instagram-gradient hover:opacity-90 font-bold py-2.5 rounded-full shadow-lg flex items-center justify-center space-x-2 text-xs tracking-wide transition">
+                        <i id="voice-btn-icon" class="fa-solid fa-volume-high"></i>
+                        <span id="voice-btn-text">Escuchar Reel con Voz</span>
+                    </button>
+
+                    <div class="flex justify-center space-x-2">
+                        <span id="dot-0" onclick="showSlide(0)" class="w-2 h-2 rounded-full bg-white cursor-pointer transition-all"></span>
+                        <span id="dot-1" onclick="showSlide(1)" class="w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></span>
+                        <span id="dot-2" onclick="showSlide(2)" class="w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></span>
+                        <span id="dot-3" onclick="showSlide(3)" class="w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all"></span>
+
+                    </div>
+
+                    <div class="flex items-center justify-between border-t border-white/10 pt-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center font-bold text-xs">S</div>
+                            <div>
+                                <p class="text-[11px] font-bold">@TheSociologicalWall</p>
+                                <p class="text-[9px] text-gray-400">Audio original del grupo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-black/40 z-0"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/40 via-slate-900/70 to-purple-950/40 z-0"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: INFO -->
+        <div id="tab-info" class="tab-content hidden">
+
+            <div class="max-w-2xl mx-auto bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800 border-b pb-2"><i class="fa-solid fa-circle-info text-blue-500 mr-2"></i>Información del Proyecto</h2>
+                <table class="w-full text-sm text-left border-collapse">
+                    <tbody>
+                        <tr class="border-b"><td class="py-2 font-bold text-gray-600 w-1/3">Actividad:</td><td class="py-2 text-gray-900">Actividad evaluable 2 (AE2)</td></tr>
+                        <tr class="border-b"><td class="py-2 font-bold text-gray-600">Asignatura:</td><td class="py-2 text-gray-900">Sociedad, Familia y Educación</td></tr>
+                        <tr class="border-b"><td class="py-2 font-bold text-gray-600">Curso Académico:</td><td class="py-2 text-gray-900">2026/27</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- App JavaScript Logic Code -->
+    <script>
+        // Carga masiva de archivos locales con FileReader (Fallback preventivo)
+        function handleGlobalUpload(event) {
+            const files = event.target.files;
+
+            if (!files || files.length === 0) return;
+
+            const count = Math.min(files.length, 5);
+            let processed = 0;
+
+            for (let i = 0; i < count; i++) {
+                const reader = new FileReader();
+                const currentId = (i + 1).toString();
+                
+                reader.onload = function(e) {
+                    const base64Data = e.target.result;
+                    localStorage.setItem('sociogram_persisted_img_' + currentId, base64Data);
+                    renderImageOnWall(currentId, base64Data);
+                    
+                    processed++;
+                    if (processed === count) {
+                        showSuccessBanner(count);
+                    }
+                };
+
+                reader.readAsDataURL(files[i]);
+            }
+        }
+
+        function renderImageOnWall(id, base64Data) {
+            const img = document.getElementById('img-post-' + id);
+            const emptyBox = document.getElementById('box-empty-' + id);
+            if (img && emptyBox) {
+                img.src = base64Data;
+                img.classList.remove('hidden');
+                emptyBox.classList.add('hidden');
+            }
+        }
+
+        function showSuccessBanner(loadedCount) {
+            const banner = document.getElementById('upload-status-banner');
+            const text = document.getElementById('upload-status-text');
+            if (banner && text) {
+                text.innerText = `¡Se han cargado ${loadedCount} fotos con éxito y se han guardado en la memoria del navegador!`;
+
+                banner.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function loadCachedImages() {
+            for (let i = 1; i <= 5; i++) {
+                const savedData = localStorage.getItem('sociogram_persisted_img_' + i);
+                if (savedData) {
+                    renderImageOnWall(i, savedData);
+                }
+            }
+            
+            // Tratamiento de error si el sandbox bloquea la carga de la red externa de GitHub
+            document.querySelectorAll('img[id^="img-post-"]').forEach(img => {
+                img.onerror = function() {
+                    const id = this.id.replace('img-post-', '');
+                    const cache = localStorage.getItem('sociogram_persisted_img_' + id);
+                    if (cache) {
+
+                        this.src = cache;
+                    } else {
+                        this.classList.add('hidden');
+                        const emptyBox = document.getElementById('box-empty-' + id);
+                        if (emptyBox) emptyBox.classList.remove('hidden');
+                    }
+                };
+            });
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('block');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.add('block');
+
+            document.querySelectorAll('nav flex items-center button, nav div flex button').forEach(btn => {
+
+                if(btn.id) {
+                    btn.classList.remove('text-black', 'font-bold');
+                    btn.classList.add('text-gray-700');
+                }
+            });
+            const activeNav = document.getElementById('nav-' + tabId);
+            if(activeNav) activeNav.classList.add('text-black', 'font-bold');
+
+            if (tabId !== 'reels') window.speechSynthesis.cancel();
+        }
+
+        function toggleLike(button) {
+            const icon = button.querySelector('i');
+            const countSpan = button.closest('.p-4').querySelector('.likes-count');
+            let currentLikes = parseInt(countSpan.innerText);
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular', 'fa-heart');
+                icon.classList.add('fa-solid', 'fa-heart', 'text-red-500');
+                countSpan.innerText = currentLikes + 1;
+
+            } else {
+                icon.classList.remove('fa-solid', 'fa-heart', 'text-red-500');
+                icon.classList.add('fa-regular', 'fa-heart');
+                countSpan.innerText = currentLikes - 1;
+            }
+        }
+
+        const reelSlides = [
+            {
+                title: "Conclusión General",
+                icon: "fa-graduation-cap",
+                text: "A lo largo de este trabajo, el análisis de los diferentes elementos visuales y textuales presentes en los centros educativos nos ha permitido constatar que el espacio escolar no es, en ningún caso, un territorio neutro. Las paredes, los murales y los carteles actúan como un potente \"currículo oculto\" que educa de forma silenciosa, transmitiendo normas, valores y modelos de identidad que condicionan directamente la socialización del alumnado."
+            },
+            {
+                title: "Perspectiva de Género",
+                icon: "fa-venus-mars",
+                text: "En relación con el género, las imágenes analizadas evidencian una doble realidad. Por un lado, el entorno digital se ha convertido en un nuevo escenario de violencia y cosificación, donde las mujeres siguen siendo el principal objetivo de amenazas como los deepfakes, lo que exige una respuesta educativa urgente basada en el consentimiento y la alfabetización mediática. Por otro lado, cuando el paisaje escolar visibiliza intencionadamente referentes femeninos en ámbitos como la ciencia, se rompe con el androcentrismo histórico y se amplían las expectativas académicas y profesionales de las alumnas, combatiendo la brecha de género en las disciplinas STEM."
+            },
+            {
+
+                title: "Diversidad Cultural",
+                icon: "fa-earth-americas",
+                text: "Respecto a la diversidad cultural, el análisis revela una tensión fundamental. Mostrar la pluralidad mediante la gastronomía o las festividades típicas puede ser un primer paso, pero corre el riesgo de caer en un enfoque folclórico y superficial que ignore las desigualdades estructurales. Para que la inclusión sea real, es imprescindible transitar hacia una interculturalidad crítica, donde las diferentes identidades convivan en igualdad de condiciones, se cuestionen los privilegios y se establezcan puentes de diálogo que fomenten un verdadero sentido de pertenencia comunitaria."
+            },
+            {
+                title: "Agente Transformador",
+                icon: "fa-wand-magic-sparkles",
+                text: "Finalmente, el desarrollo de nuestra propuesta didáctica nos ha llevado a la conclusión de que el alumnado no debe ser un mero receptor de estos mensajes, sino un agente activo y transformador. Convertir al estudiante en un investigador de su propio entorno (analizando los mensajes de su centro o de las empresas de su sector profesional) no solo desarrolla su pensamiento crítico e imaginación sociológica, sino que le empodera para deconstruir estereotipos y generar nuevos mensajes inclusivos."
+            }
+        ];
+
+        let currentSlideIndex = 0;
+
+        function showSlide(index) {
+            currentSlideIndex = index;
+            const slide = reelSlides[index];
+            window.speechSynthesis.cancel();
+            document.getElementById('voice-btn-text').innerText = "Escuchar Reel con Voz";
+
+
+            const container = document.getElementById('reel-slide-container');
+            container.style.opacity = 0;
+            
+            setTimeout(() => {
+                document.getElementById('reel-icon').innerHTML = `<i class="fa-solid ${slide.icon}"></i>`;
+                document.getElementById('reel-title').innerText = slide.title;
+                document.getElementById('reel-text').innerText = slide.text;
+                container.style.opacity = 1;
+            }, 300);
+
+            for (let i = 0; i < reelSlides.length; i++) {
+                const dot = document.getElementById('dot-' + i);
+                if (i === index) {
+                    dot.classList.remove('bg-white/40');
+                    dot.classList.add('bg-white', 'w-3');
+                } else {
+                    dot.classList.remove('bg-white', 'w-3');
+                    dot.classList.add('bg-white/40');
+                }
+
+            }
+        }
+
+        function playReelVoice() {
+            const vBtnText = document.getElementById('voice-btn-text');
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                vBtnText.innerText = "Escuchar Reel con Voz";
+                return;
+            }
+            const currentText = reelSlides[currentSlideIndex].text;
+            const utterance = new SpeechSynthesisUtterance(currentText);
+            utterance.lang = 'es-ES';
+            utterance.onend = function() { vBtnText.innerText = "Escuchar Reel con Voz"; };
+            utterance.onerror = function() { vBtnText.innerText = "Escuchar Reel con Voz"; };
+            vBtnText.innerText = "Detener Voz...";
+            window.speechSynthesis.speak(utterance);
+        }
+
+
+        window.onload = function() {
+            loadCachedImages();
+            showSlide(0);
+        };
+    </script>
+</body>
+</html>
+
+
